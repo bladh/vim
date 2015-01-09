@@ -25,6 +25,10 @@ syntax on
 set number
 set colorcolumn=80
 set hlsearch
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+highlight IndentGuidesOdd ctermbg=black
+highlight IndentGuidesEven ctermbg=17
 
 "" Mappings
 let mapleader=" "
@@ -42,12 +46,6 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 "" Functions
-function! StartUp()
-    if 0 == argc()
-        NERDTree
-    end
-endfunction
-
 function ShowDiff()
 	if winwidth(1) > 160
 		vnew
@@ -62,7 +60,6 @@ function ShowDiff()
 endfunction
 
 "" Autocommands
-autocmd VimEnter * call StartUp()
 autocmd FileType gitcommit exec ShowDiff()
 
 "" Fancy statusbar settings
