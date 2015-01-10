@@ -28,7 +28,7 @@ set hlsearch
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 highlight IndentGuidesOdd ctermbg=black
-highlight IndentGuidesEven ctermbg=17
+highlight IndentGuidesEven ctermbg=232
 
 "" Mappings
 let mapleader=" "
