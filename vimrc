@@ -5,6 +5,7 @@ call pathogen#helptags()
 filetype plugin indent on
 
 "" General settings
+let g:neocomplete#enable_at_startup = 1
 set mouse=a
 set splitright
 set splitbelow
@@ -13,18 +14,19 @@ set term=xterm-256color
 set tabstop=4
 set shiftwidth=4
 set title
-set fillchars+=vert:\
 set ttimeoutlen=40
-set noshowmode
 set laststatus=2
 set hidden
 
 "" Visuals
 colorscheme distinguished
 syntax on
+set fillchars+=vert:\
 set number
 set colorcolumn=80
 set hlsearch
+set cursorline
+set noshowmode
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 highlight IndentGuidesOdd ctermbg=black
