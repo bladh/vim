@@ -17,6 +17,7 @@ get https://github.com/tpope/vim-fugitive.git
 get https://github.com/airblade/vim-gitgutter.git
 get https://github.com/itchyny/lightline.vim.git
 get https://github.com/Shougo/neocomplete.vim.git
+get https://github.com/sjl/gundo.vim.git
 )
 
 ln -s $(readlink -f vimrc) $HOME/.vimrc
