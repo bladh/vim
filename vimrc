@@ -5,7 +5,7 @@ call pathogen#helptags()
 filetype plugin indent on
 
 "" General settings
-let g:neocomplete#enable_at_startup = 1
+"let g:neocomplete#enable_at_startup = 1
 set mouse=a
 set splitright
 set splitbelow
@@ -13,10 +13,28 @@ set shell=/bin/sh
 set term=xterm-256color
 set tabstop=4
 set shiftwidth=4
+set history=200
 set title
 set ttimeoutlen=40
 set laststatus=2
 set hidden
+set title titlestring=VIM\ %F
+set clipboard+=unnamed
+set paste
+set go+=a
+set expandtab
+set scrolloff=5
+autocmd FileType sh set noexpandtab
+autocmd FileType bash set noexpandtab
+autocmd FileType go set noexpandtab
+autocmd FileType vim set noexpandtab
+source ~/.vim/bundle/vim-autoswap-i3/autoswap_i3.vim
+let g:gundo_preview_bottom = 1
+let g:gundo_preview_height = winheight(1)/2
+
+"let g:gundo_preview_height = 20
+
+let g:gundo_right = 1
 
 "" Visuals
 colorscheme distinguished
@@ -31,6 +49,25 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
 highlight IndentGuidesOdd ctermbg=black
 highlight IndentGuidesEven ctermbg=232
+highlight IndentGuidesOdd ctermfg=237
+highlight IndentGuidesEven ctermfg=238
+map m :GitGutterLineHighlightsToggle<CR>
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+highlight ExtraWhitespace ctermbg=red
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+"" vimdiff configuration
+if &diff
+	set cursorbind
+	set scrollbind
+"	map <Down> j:syncbind<CR>
+"	map <Up> k:syncbind<CR>
+	map <Down> j<C-w><C-w><C-w><C-w>
+	map <Up> k<C-w><C-w><C-w><C-w>
+endif
 
 "" Mappings
 let mapleader=" "
@@ -41,11 +78,7 @@ nnoremap  <silent>   <tab>  :bn<CR>
 nnoremap  <silent> <s-tab>  :bp<CR>
 nnoremap <C-P> "*p
 nnoremap <Space> :nohlsearch<Bar>:echo<CR>
-
-" show excessive whitespace:
-highlight ExtraWhitespace ctermbg=red
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhitespace /\s\+$/
+nnoremap <F5> :GundoToggle<CR>
 
 "" Functions
 function ShowDiff()
