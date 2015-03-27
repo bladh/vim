@@ -80,6 +80,7 @@ nnoremap  <silent> <s-tab>  :bp<CR>
 nnoremap <C-P> "*p
 nnoremap <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <F5> :GundoToggle<CR>
+nnoremap <F6> :TagbarToggle<CR>
 
 "" Functions
 function ShowDiff()
