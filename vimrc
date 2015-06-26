@@ -37,7 +37,7 @@ let g:gundo_preview_height = winheight(1)/2
 let g:gundo_right = 1
 
 "" Visuals
-colorscheme distinguished
+colorscheme Tomorrow
 syntax on
 set fillchars+=vert:\
 set number
@@ -47,10 +47,17 @@ set cursorline
 set noshowmode
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-highlight IndentGuidesOdd ctermbg=black
-highlight IndentGuidesEven ctermbg=232
+" For dark colorscheme
+"highlight IndentGuidesOdd ctermbg=black
+"highlight IndentGuidesEven ctermbg=232
+"highlight IndentGuidesOdd ctermfg=237
+"highlight IndentGuidesEven ctermfg=238
+" For bright colorscheme
+"highlight IndentGuidesOdd ctermbg=3
+highlight IndentGuidesEven ctermbg=7
 highlight IndentGuidesOdd ctermfg=237
 highlight IndentGuidesEven ctermfg=238
+""
 map m :GitGutterLineHighlightsToggle<CR>
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
@@ -79,8 +86,16 @@ nnoremap  <silent> <s-tab>  :bp<CR>
 nnoremap <C-P> "*p
 nnoremap <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <F5> :GundoToggle<CR>
+nnoremap <F6> :TagbarToggle<CR>
+
+"" Dictionary completion
+set dictionary+=/usr/share/dict/words
+set thesaurus+=~/.thesaurus
+set complete+=k
 
 "" Functions
+
+" Show diff in split window
 function ShowDiff()
 	if winwidth(1) > 160
 		vnew
@@ -98,8 +113,9 @@ endfunction
 autocmd FileType gitcommit exec ShowDiff()
 
 "" Fancy statusbar settings
+"" If using dark scheme, set colorscheme to 'wombat'
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'Tomorrow',
       \ 'active': {
       \   'left': [ [ 'mode' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
