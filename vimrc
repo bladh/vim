@@ -2,7 +2,6 @@
 filetype off
 call pathogen#infect()
 call pathogen#helptags()
-filetype plugin indent on
 
 "" General settings
 "let g:neocomplete#enable_at_startup = 1
@@ -28,7 +27,9 @@ autocmd FileType sh set noexpandtab
 autocmd FileType bash set noexpandtab
 autocmd FileType go set noexpandtab
 autocmd FileType vim set noexpandtab
-source ~/.vim/bundle/vim-autoswap-i3/autoswap_i3.vim
+filetype plugin indent on
+set autoindent
+"source ~/.vim/bundle/vim-autoswap-i3/autoswap_i3.vim
 let g:gundo_preview_bottom = 1
 let g:gundo_preview_height = winheight(1)/2
 
