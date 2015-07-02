@@ -29,6 +29,7 @@ get https://github.com/itchyny/lightline.vim.git
 #get https://github.com/Shougo/neocomplete.vim.git
 get https://github.com/sjl/gundo.vim.git
 get https://github.com/majutsushi/tagbar.git
+get https://github.com/moll/vim-node.git
 )
 [ -f $HOME/.vimrc ] || ln -s $(readlink -f vimrc) $HOME/.vimrc
 [ -f $HOME/.vim ] || ln -s $(readlink -f vim) $HOME/.vim
