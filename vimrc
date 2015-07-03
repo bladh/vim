@@ -55,8 +55,8 @@ let g:indent_guides_auto_colors = 0
 "highlight IndentGuidesEven ctermfg=238
 " For bright colorscheme
 "highlight IndentGuidesOdd ctermbg=3
-highlight IndentGuidesEven ctermbg=7
-highlight IndentGuidesOdd ctermfg=237
+highlight IndentGuidesEven ctermbg=254
+"highlight IndentGuidesOdd ctermfg=237
 highlight IndentGuidesEven ctermfg=238
 ""
 map m :GitGutterLineHighlightsToggle<CR>
