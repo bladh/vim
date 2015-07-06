@@ -59,7 +59,6 @@ highlight IndentGuidesEven ctermbg=254
 "highlight IndentGuidesOdd ctermfg=237
 highlight IndentGuidesEven ctermfg=238
 ""
-map m :GitGutterLineHighlightsToggle<CR>
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
@@ -88,6 +87,13 @@ nnoremap <C-P> "*p
 nnoremap <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <F5> :GundoToggle<CR>
 nnoremap <F6> :TagbarToggle<CR>
+map m :GitGutterLineHighlightsToggle<CR>
+
+"" Commands
+command Q q
+command W w
+command QA qa!
+command WQ wq
 
 "" Dictionary completion
 set dictionary+=/usr/share/dict/words
