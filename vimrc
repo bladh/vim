@@ -1,3 +1,5 @@
+let darktheme=1
+
 "" Pathogen load
 filetype off
 call pathogen#infect()
@@ -38,7 +40,6 @@ let g:gundo_preview_height = winheight(1)/2
 let g:gundo_right = 1
 
 "" Visuals
-colorscheme Tomorrow
 syntax on
 set fillchars+=vert:\
 set number
@@ -48,23 +49,58 @@ set cursorline
 set noshowmode
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_auto_colors = 0
-" For dark colorscheme
-"highlight IndentGuidesOdd ctermbg=black
-"highlight IndentGuidesEven ctermbg=232
-"highlight IndentGuidesOdd ctermfg=237
-"highlight IndentGuidesEven ctermfg=238
-" For bright colorscheme
-"highlight IndentGuidesOdd ctermbg=3
-highlight IndentGuidesEven ctermbg=254
-"highlight IndentGuidesOdd ctermfg=237
-highlight IndentGuidesEven ctermfg=238
-""
 exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 set list
 
 highlight ExtraWhitespace ctermbg=red
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
+
+if darktheme
+	colorscheme distinguished
+	"highlight IndentGuidesOdd ctermbg=black
+	highlight IndentGuidesEven ctermbg=232
+	highlight IndentGuidesOdd ctermfg=237
+	highlight IndentGuidesEven ctermfg=238
+	let g:lightline = {
+		\ 'colorscheme': 'wombat',
+		\ 'active': {
+		\   'left': [ [ 'mode' ],
+		\             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+		\ },
+		\ 'component': {
+		\   'readonly': '%{&readonly?"\uE0A2":""}',
+		\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+		\ },
+		\ 'component_visible_condition': {
+		\   'readonly': '(&filetype!="help"&& &readonly)',
+		\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+		\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+		\ },
+		\ }
+else
+	colorscheme Tomorrow
+	"highlight IndentGuidesOdd ctermbg=3
+	highlight IndentGuidesEven ctermbg=254
+	"highlight IndentGuidesOdd ctermfg=237
+	highlight IndentGuidesEven ctermfg=238
+	let g:lightline = {
+		\ 'colorscheme': 'Tomorrow',
+		\ 'active': {
+		\   'left': [ [ 'mode' ],
+		\             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+		\ },
+		\ 'component': {
+		\   'readonly': '%{&readonly?"\uE0A2":""}',
+		\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+		\ },
+		\ 'component_visible_condition': {
+		\   'readonly': '(&filetype!="help"&& &readonly)',
+		\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+		\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+		\ },
+		\ }
+endif
 
 "" vimdiff configuration
 if &diff
@@ -118,22 +154,3 @@ endfunction
 
 "" Autocommands
 autocmd FileType gitcommit exec ShowDiff()
-
-"" Fancy statusbar settings
-"" If using dark scheme, set colorscheme to 'wombat'
-let g:lightline = {
-      \ 'colorscheme': 'Tomorrow',
-      \ 'active': {
-      \   'left': [ [ 'mode' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"\uE0A2":""}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ }
