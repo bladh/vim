@@ -1,144 +1,56 @@
-let darktheme=1
-
-"" Pathogen load
-filetype off
-call pathogen#infect()
-call pathogen#helptags()
-
-"" General settings
-"let g:neocomplete#enable_at_startup = 1
-set mouse=a
-set splitright
-set splitbelow
-set shell=/bin/sh
-set term=xterm-256color
-set tabstop=4
-set shiftwidth=4
-set history=200
-set title
-set ttimeoutlen=40
-set laststatus=2
-set hidden
-set title titlestring=VIM\ %F
-set clipboard+=unnamed
-set paste
-set go+=a
-set expandtab
-set scrolloff=5
-autocmd FileType sh set noexpandtab
-autocmd FileType bash set noexpandtab
-autocmd FileType go set noexpandtab
-autocmd FileType vim set noexpandtab
-filetype plugin indent on
-set autoindent
-"source ~/.vim/bundle/vim-autoswap-i3/autoswap_i3.vim
-let g:gundo_preview_bottom = 1
-let g:gundo_preview_height = winheight(1)/2
-
-"let g:gundo_preview_height = 20
-
-let g:gundo_right = 1
-
-"" Visuals
+" general settings
+set nu
 syntax on
-set fillchars+=vert:\
-set number
+colorscheme delek
+set expandtab
+set shiftwidth=4
 set colorcolumn=80
 set hlsearch
-set cursorline
-set noshowmode
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-set list
 
+" highlight whitespace
+set list
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
 highlight ExtraWhitespace ctermbg=red
+highlight SpecialKey ctermbg=7
+highlight SpecialKey ctermfg=13
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
-if darktheme
-	colorscheme distinguished
-	"highlight IndentGuidesOdd ctermbg=black
-	highlight IndentGuidesEven ctermbg=232
-	highlight IndentGuidesOdd ctermfg=237
-	highlight IndentGuidesEven ctermfg=238
-	let g:lightline = {
-		\ 'colorscheme': 'wombat',
-		\ 'active': {
-		\   'left': [ [ 'mode' ],
-		\             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-		\ },
-		\ 'component': {
-		\   'readonly': '%{&readonly?"\uE0A2":""}',
-		\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-		\ },
-		\ 'component_visible_condition': {
-		\   'readonly': '(&filetype!="help"&& &readonly)',
-		\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-		\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-		\ },
-		\ }
-else
-	colorscheme Tomorrow
-	"highlight IndentGuidesOdd ctermbg=3
-	highlight IndentGuidesEven ctermbg=254
-	"highlight IndentGuidesOdd ctermfg=237
-	highlight IndentGuidesEven ctermfg=238
-	let g:lightline = {
-		\ 'colorscheme': 'Tomorrow',
-		\ 'active': {
-		\   'left': [ [ 'mode' ],
-		\             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-		\ },
-		\ 'component': {
-		\   'readonly': '%{&readonly?"\uE0A2":""}',
-		\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-		\ },
-		\ 'component_visible_condition': {
-		\   'readonly': '(&filetype!="help"&& &readonly)',
-		\   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-		\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-		\ },
-		\ }
-endif
+" wild menu
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*/.git/**/*
+set wildignorecase
+
+" buffers
+set hidden
+nnoremap gb :ls<CR>:b<Space>
+
+" tabs
+nnoremap <tab> :tabnext<CR>
+nnoremap <s-tab> :tabp<CR>
+nnoremap <c-n> :tabnew<CR>:Lexplore<CR>
+set showtabline=2
+
+" file exploration
+nnoremap < :Lexplore<CR>
+
+" netrw conf
+let g:netrw_keepdir = 0
+let g:netrw_winsize = 30
+let g:netrw_banner = 0
+let g:netrw_browse_split = 0
+let g:netrw_liststyle = 3
+autocmd FileType netrw autocmd BufLeave <buffer> if &filetype == 'netrw' | :bd | endif
 
 "" vimdiff configuration
 if &diff
 	set cursorbind
 	set scrollbind
-"	map <Down> j:syncbind<CR>
-"	map <Up> k:syncbind<CR>
 	map <Down> j<C-w><C-w><C-w><C-w>
 	map <Up> k<C-w><C-w><C-w><C-w>
 endif
 
-"" Mappings
-let mapleader=" "
-map <Leader> <Plug>(easymotion-prefix)
-nmap s <Plug>(easymotion-s)
-nnoremap ö :
-nnoremap  <silent>   <tab>  :bn<CR>
-nnoremap  <silent> <s-tab>  :bp<CR>
-nnoremap <C-P> "*p
-nnoremap <Space> :nohlsearch<Bar>:echo<CR>
-nnoremap <F5> :GundoToggle<CR>
-nnoremap <F6> :TagbarToggle<CR>
-map m :GitGutterLineHighlightsToggle<CR>
-
-"" Commands
-command Q q
-command W w
-command QA qa!
-command WQ wq
-
-"" Dictionary completion
-set dictionary+=/usr/share/dict/words
-set thesaurus+=~/.thesaurus
-set complete+=k
-
-"" Functions
-
-" Show diff in split window
 function ShowDiff()
 	if winwidth(1) > 160
 		vnew
@@ -152,5 +64,4 @@ function ShowDiff()
 	tabfirst
 endfunction
 
-"" Autocommands
 autocmd FileType gitcommit exec ShowDiff()
